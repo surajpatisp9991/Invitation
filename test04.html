@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Wedding Invitation</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-image: url('background_image.jpg');
+        background-size: cover;
+        background-position: center;
+    }
+
+    .overlay {
+        position: relative;
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 20px;
+        border-radius: 8px;
+        max-width: 800px;
+        margin: 20px auto;
+        box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+    }
+
+    h1, h2 {
+        text-align: center;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    p {
+        line-height: 1.6;
+    }
+
+    .invitation-content {
+        margin-top: 30px;
+    }
+
+    .date, .location {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .rsvp {
+        text-align: center;
+        margin-top: 30px;
+    }
+
+    .rsvp a {
+        text-decoration: none;
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .rsvp a:hover {
+        background-color: #45a049;
+    }
+
+    .photo {
+        text-align: center;
+        margin-top: 20px;
+        position: relative;
+    }
+
+    .photo img {
+        max-width: 100%;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+    }
+
+    .PhotosGallary {
+        text-align: center;
+        margin-top: 20px;
+        position: relative;
+    }
+    .PhotosGallary img {
+        max-width: 100%;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+    }
+
+    .couple-names {
+        position: absolute;
+        bottom: 250px;
+        left: 50%;
+        transform: translateX(-50%);
+
+        padding: 10px 20px;
+        border-radius: 5px;
+        color: yellow;
+        font-family: 'Baloo Tamma 2', cursive;
+    }
+
+    .play-btn {
+        position: top;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 50%;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .play-btn:hover {
+        background-color: #45a049;
+    }
+
+    .play-btn i {
+        font-size: 24px;
+    }
+    .countdown {
+        text-align: center;
+        margin-top: 30px;
+        font-size: 24px;
+        font-family: 'Baloo Tamma 2', cursive;
+
+</style>
+</head>
+<body>
+<audio id="backgroundMusic" loop>
+  <source src="Sar-Sukhachi-Shravani(PagalWorld).mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
+<div class="overlay">
+    <div class="photo">
+        <img src="PhotoFiles\Capture6.jpg" alt="Bride and Groom">
+        <div class="couple-names">
+            <p>निखिल & समृद्धी</p>
+            <p></p>
+            <p></p>
+        </div>
+
+        <button class="play-btn" onclick="togglePlayPause()">
+            <i id="playIcon" class="fa fa-play"></i>
+        </button>
+        
+    </div>
+    <h1>Wedding Invitation</h1>
+    <div class="invitation-content">
+        <h2>You're Invited!</h2>
+        <p>
+            We are excited to announce the wedding of [Bride's Name] and [Groom's Name].
+            Join us as we celebrate this special day with love, laughter, and happily ever after.
+        </p>
+        <div class="date">
+            <h3>Date:</h3>
+            <p>[Date of the wedding]</p>
+        </div>
+        <div class="countdown" id="countdown"></div>
+        <div class="location">
+            <h3>Location:</h3>
+            <p>[Venue Name]</p>
+            <p>[Address]</p>
+        </div>
+    </div>
+    <div class="PhotosGallary">
+            <h3>Photo Gallary:</h3>
+            <br><br>
+            <img src="PhotoFiles\Capture2.jpg" alt="local image">
+            <img src="PhotoFiles\Capture3.jpg" alt="local image2">
+            <img src="PhotoFiles\Capture4.jpg" alt="local image">
+            <img src="PhotoFiles\Capture5.jpg" alt="local image">
+            <img src="Capture.jpg" alt="local image">
+           
+        </div>
+</div>
+<script>
+
+    var weddingDate = new Date("28 April 2024").getTime();
+    var countDownFunction = setInterval(function() {
+        var now = new Date().getTime();
+        var distance = weddingDate - now;
+
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById("countdown").innerHTML = days + "d " + hours + "h "
+        + minutes + "m " + seconds + "s ";
+
+        if (distance < 0) {
+            clearInterval(countDownFunction);
+            document.getElementById("countdown").innerHTML = "EXPIRED";
+        }
+    }, 1000);
+
+
+    var audio = document.getElementById("backgroundMusic");
+    var playIcon = document.getElementById("playIcon");
+
+    function togglePlayPause() {
+        if (audio.paused) {
+            audio.play();
+            playIcon.className = "fa fa-pause";
+        } else {
+            audio.pause();
+            playIcon.className = "fa fa-play";
+        }
+    }
+</script>
+</body>
+</html>
